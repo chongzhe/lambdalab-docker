@@ -53,16 +53,12 @@ services:
       - build_env
   dataservice:
     image: '${REGISTRY}lambdalab/dataservice:${VERSION}'
-    depends_on:
-      - db
     volumes:
       - ./data/projects:/lambda_home/data/projects
       - ./logs:/lambda_home/logs
       - ./configs:/lambda_home/configs
   projectservice:
     image: '${REGISTRY}lambdalab/projectservice:${VERSION}'
-    depends_on:
-      - db
     environment:
       - JAVA_OPTS=-Dvars.jenkins.dockerImage=local/build_environment
     volumes:
@@ -72,16 +68,11 @@ services:
       - ~/.ssh:/root/.ssh
   liaceservice:
     image: '${REGISTRY}lambdalab/liaceservice:${VERSION}'
-    depends_on:
-      - db
-      - elasticsearch
     volumes:
       - ./configs:/lambda_home/configs
       - ./logs:/lambda_home/logs
   metadataservice:
     image: '${REGISTRY}lambdalab/metadataservice:${VERSION}'
-    depends_on:
-      - db
     volumes:
       - ./configs:/lambda_home/configs
       - ./logs:/lambda_home/logs
@@ -89,16 +80,11 @@ services:
       - 10060:10060
   pygments:
     image: '${REGISTRY}lambdalab/pygments:${VERSION}'
-    depends_on:
-      - db
     volumes:
       - ./configs:/lambda_home/configs
       - ./logs:/lambda_home/logs
   codatlas:
     image: '${REGISTRY}lambdalab/codatlas:${VERSION}'
-    depends_on:
-      - db
-      - redis
     volumes:
       - ./configs:/lambda_home/configs
       - ./logs:/lambda_home/logs
