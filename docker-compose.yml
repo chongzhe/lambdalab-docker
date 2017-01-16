@@ -36,6 +36,7 @@ services:
       - ./logs/elasticsearch:/lambda_home/data/logs
     ports:
       - 9200:9200
+      - 9300:9300
   jenkins:
     image: '${REGISTRY}lambdalab/jenkins:0.2'
     environment:
